@@ -1,20 +1,27 @@
 FROM ubuntu:trusty
 
-MAINTAINER Manfred Touron "m@42.am"
+# Based on the Dockerfile for moul/icecast by Manfred Touron <m@42.am>
+MAINTAINER Stéphane Lepin "contact@slepin.fr"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get -qq -y update && \
-    apt-get -qq -y install icecast2 python-setuptools && \
-    apt-get clean
+	apt-get -qq -y install build-essential \
+		wget curl libxml2-dev libxslt1-dev \
+		libogg-dev libvorbis-dev libtheora-dev \
+		libspeex-dev python-setuptools && \
+	wget https://github.com/karlheyes/icecast-kh/archive/icecast-2.4.0-kh3.tar.gz -O- | tar zxvf - && \
+	cd icecast-kh-icecast-2.4.0-kh3 && \
+	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+	&& make && make install && useradd icecast
 
 RUN easy_install supervisor && \
     easy_install supervisor-stdout
 
-CMD ["/start.sh"]
-EXPOSE 8000
-VOLUME ["/config", "/var/log/icecast2", "/etc/icecast2"]
-
 ADD ./start.sh /start.sh
 ADD ./etc /etc
-RUN chown -R icecast2 /etc/icecast2
+RUN chown -R icecast /etc/icecast.xml
+
+CMD ["/start.sh"]
+EXPOSE 8000
+VOLUME ["/config", "/var/log/icecast"]

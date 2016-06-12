@@ -1,43 +1,38 @@
-# Icecast in Docker [![Build Status](https://travis-ci.org/moul/docker-icecast.svg?branch=master)](https://travis-ci.org/moul/docker-icecast)
-
-Icecast2 Dockerfile
-
-[![](http://dockeri.co/image/moul/icecast)](https://index.docker.io/u/moul/icecast/)
+Icecast-KH Dockerfile
 
 ## Run
 
 Run with default password, export port 8000
 
 ```bash
-docker run -p 8000:8000 moul/icecast
+docker run -p 8000:8000 stephanel/icecast-kh
 $BROWSER localhost:8000
 ```
 
 Run with custom password
 
 ```bash
-docker run -p 8000:8000 -e ICECAST_SOURCE_PASSWORD=aaaa -e ICECAST_ADMIN_PASSWORD=bbbb -e ICECAST_PASSWORD=cccc -e ICECAST_RELAY_PASSWORD=dddd moul/icecast
+docker run -p 8000:8000 -e ICECAST_SOURCE_PASSWORD=aaaa -e ICECAST_ADMIN_PASSWORD=bbbb -e ICECAST_PASSWORD=cccc -e ICECAST_RELAY_PASSWORD=dddd stephanel/icecast-kh
 ```
 
 Run with custom configuration
 
 ```bash
-docker run -p 8000:8000 -v /local/path/to/icecast/config:/etc/icecast2 moul/icecast
-docker run -p 8000:8000 -v /local/path/to/icecast.xml:/etc/icecast2/icecast.xml moul/icecast
+docker run -p 8000:8000 -v /local/path/to/icecast.xml:/etc/icecast.xml stephanel/icecast-kh
 ```
 
 Extends Dockerfile
 
 ```Dockerfile
-FROM moul/icecast
-ADD ./icecast.xml /etc/icecast2
+FROM stephanel/icecast-kh
+ADD ./icecast.xml /etc/icecast.xml
 ```
 
 Docker-compose
 
 ```yaml
 icecast:
-  image: moul/icecast
+  image: stephanel/icecast-kh
   volumes:
   - logs:/var/log/icecast2
   - /etc/localtime:/etc/localtime:ro
@@ -50,11 +45,6 @@ icecast:
   - 8000:8000
 ```
 
-## Examples
-
-- https://github.com/ultreme/scc-radio/
-
-
 ## License
 
-[MIT](https://github.com/moul/docker-icecast/blob/master/LICENSE.md)
+[MIT](https://github.com/stephanel/docker-icecast-kh/blob/master/LICENSE.md)
