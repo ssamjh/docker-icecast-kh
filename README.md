@@ -41,6 +41,9 @@ icecast:
   - ICECAST_ADMIN_PASSWORD=bbb
   - ICECAST_PASSWORD=ccc
   - ICECAST_RELAY_PASSWORD=ddd
+  - ICECAST_LOCATION=Earth
+  - ICECAST_ADMIN=john@doe.com
+  - ICECAST_HOSTNAME=stream.doe.com
   ports:
   - 8000:8000
 ```
