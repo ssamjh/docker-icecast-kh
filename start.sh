@@ -32,6 +32,15 @@ if [ -n "$ICECAST_ADMIN" ]; then
     sed -i "s/<admin>[^<]*<\/admin>/<admin>$ICECAST_ADMIN<\/admin>/g" /etc/icecast.xml
 fi
 
+if [ -n "$ICECAST_MAX_SOURCES" ]; then
+    sed -i "s/<sources>[^<]*<\/sources>/<sources>$ICECAST_MAX_SOURCES<\/sources>/g" /etc/icecast.xml
+fi
+
+if [ -n "$ICECAST_MAX_LISTENERS" ]; then
+    sed -i "s/<clients>[^<]*<\/clients>/<clients>$ICECAST_MAX_LISTENERS<\/clients>/g" /etc/icecast.xml
+fi
+
+
 cat /etc/icecast.xml
 
 chown -R icecast /var/log/icecast

@@ -12,15 +12,16 @@ RUN apt-get -qq -y update && \
 		libspeex-dev python-setuptools && \
 	wget https://github.com/karlheyes/icecast-kh/archive/icecast-2.4.0-kh3.tar.gz -O- | tar zxvf - && \
 	cd icecast-kh-icecast-2.4.0-kh3 && \
-	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-	&& make && make install && useradd icecast
+	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && \
+	make && make install && useradd icecast && \
+	chown -R icecast /etc/icecast.xml && \
+	sed -i "s/<sources>[^<]*<\/sources>/<sources>42<\/sources>/g" /etc/icecast.xml
 
 RUN easy_install supervisor && \
     easy_install supervisor-stdout
 
 ADD ./start.sh /start.sh
 ADD ./etc /etc
-RUN chown -R icecast /etc/icecast.xml
 
 CMD ["/start.sh"]
 EXPOSE 8000
