@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 
 # Based on the Dockerfile for moul/icecast by Manfred Touron <m@42.am>
-MAINTAINER Stéphane Lepin "contact@slepin.fr"
+MAINTAINER Stéphane Lepin <stephane.lepin@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -10,8 +10,8 @@ RUN apt-get -qq -y update && \
 		wget curl libxml2-dev libxslt1-dev \
 		libogg-dev libvorbis-dev libtheora-dev \
 		libspeex-dev python-setuptools && \
-	wget https://github.com/karlheyes/icecast-kh/archive/icecast-2.4.0-kh3.tar.gz -O- | tar zxvf - && \
-	cd icecast-kh-icecast-2.4.0-kh3 && \
+	wget https://github.com/karlheyes/icecast-kh/archive/icecast-2.4.0-kh4.tar.gz -O- | tar zxvf - && \
+	cd icecast-kh-icecast-2.4.0-kh4 && \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && \
 	make && make install && useradd icecast && \
 	chown -R icecast /etc/icecast.xml && \
