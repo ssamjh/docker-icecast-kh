@@ -11,14 +11,14 @@ RUN apt-get -qq -y update && \
 	apt-get -qq -y install build-essential \
 		wget curl libxml2-dev libxslt1-dev \
 		libogg-dev libvorbis-dev libtheora-dev \
-		libspeex-dev python-pip && \
+		libspeex-dev python3-pip && \
 	wget "https://github.com/karlheyes/icecast-kh/archive/icecast-$IC_VERSION.tar.gz" -O- | tar zxvf - && \
 	cd "icecast-kh-icecast-$IC_VERSION" && \
 	./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && \
 	make && make install && useradd icecast && \
 	chown -R icecast /etc/icecast.xml
 
-RUN pip install supervisor supervisor-stdout
+RUN pip3 install supervisor supervisor-stdout
 
 ADD ./start.sh /start.sh
 ADD ./etc /etc
