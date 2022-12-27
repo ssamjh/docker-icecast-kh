@@ -1,5 +1,5 @@
 icecast:
-  image: stephanel/icecast-kh:latest
+  image: ssamjh/icecast-kh:latest
   volumes:
   - logs:/var/log/icecast
   - /etc/localtime:/etc/localtime:ro 

@@ -1,10 +1,11 @@
-FROM ubuntu:bionic
+FROM debian:stable-slim
 
 # Based on the Dockerfile for moul/icecast by Manfred Touron <m@42.am>
-MAINTAINER Stéphane Lepin <stephane.lepin@gmail.com>
+# Updated by ssamjh
+MAINTAINER ssamjh <sam@samhowell.nz
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV IC_VERSION "2.4.0-kh12"
+ENV IC_VERSION "2.4.0-kh16"
 
 RUN apt-get -qq -y update && \
 	apt-get -qq -y install build-essential \
