@@ -4,7 +4,6 @@ FROM alpine:latest
 # Updated by ssamjh
 MAINTAINER ssamjh <sam@samhowell.nz
 
-ENV DEBIAN_FRONTEND noninteractive
 ENV IC_VERSION "2.4.0-kh16"
 
 RUN apk update && \
